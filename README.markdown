@@ -6,4 +6,6 @@ Define rich behaviors that include both event handlers, helpers and (un)transfor
 
 Behavior isn't based on NinjaScript, instead it depends on Live Query by Brandon Aaron and Methods plugin for jQuery (for optional helpers) by Ronald Schouten.
 ## Examples:
-http://jsfiddle.net/FFNRS/
+Example #1: http://jsfiddle.net/FFNRS/
+
+Example #2: http://jsfiddle.net/BWQ6N/
