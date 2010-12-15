@@ -50,11 +50,10 @@
     
 })(jQuery, jQuery.attr);
 
-;(function($) {
-
+;(function($, undefined) {
+    
     if (!$.fn.livequery) throw "jquery.behavior.js: jQuery Plugin: Live Query not loaded.";
-    if (!($.fn.helpers = $.fn.methods)) throw "jquery.behavior.js: jQuery Plugin: Methods not loaded.";
-
+    
     $.behavior = function (metabehaviors, context) {
         
         context = context || window.document;
@@ -65,7 +64,7 @@
         }
         
         // Handle $.behavior ([{ ... }, { ... }, ... ], [context]).
-        if ($.isArray (metabehaviors)) {
+        if (metabehaviors.constructor === Array) {
             return $.each (metabehaviors, function () {
                 $.behavior (this, context);
             });
@@ -74,54 +73,42 @@
         // Handle $.behavior ({ ... }, [context]).
         return $.each (metabehaviors, function (selector, metabehavior) {
             
-            metabehavior = $.extend (true, {
-                options: {
-                    expire: true
-                },
-                helpers: null,
-                events: {},
-                transform: null,
+            metabehavior = $.extend ({
+                options: {},
+                transform: undefined,
                 untransform: undefined
             }, metabehavior);
             
+            // Cache element.
             var $element = $(selector, context);
             
             // Transform DOM element.
-            if (metabehavior.transform || metabehavior.untransform || metabehavior.helpers) {
-            
-                if (metabehavior.options.expire) {
-                    $element.expire (metabehavior.transform, metabehavior.untransform);
-                }
-                
+            if (typeof metabehavior['transform'] === 'function') {
                 $element.livequery (function () {
-                    
-                    if ($.isPlainObject (metabehavior.methods)) {
-                        $element.helpers (metabehavior.methods);
-                    }
-                    
-                    if ($.isPlainObject (metabehavior.helpers)) {
-                        $element.helpers (metabehavior.helpers);
-                    }
-                    
-                    if ($.isFunction (metabehavior.transform)) {
-                        metabehavior.transform.apply (this, arguments);
-                    }
-                    
-                }, metabehavior.untransform);
-            
+                    metabehavior['transform'].apply (this, arguments);
+                }, metabehavior['untransform']);
             }
             
             // Bind all events.
-            $.each (metabehavior.events, function (event, callback) {
-                
-                if (metabehavior.options.expire) {
-                    $element.expire (event);
+            for (var event in metabehavior) {
+                switch (event) {
+                    case 'transform':
+                    case 'untransform':
+                    case 'options':
+                        // Don't handle these here.
+                        continue;
+                    
+                    default:
+                        if (metabehavior.options['expire']) {
+                            $element.expire (event);
+                        }
+                        
+                        if (typeof metabehavior[event] === 'function') {
+                            $element.livequery (event, metabehavior[event]);
+                        }
+                        break;
                 }
-                
-                if ($.isFunction (callback)) {
-                    $element.livequery (event, callback);
-                }
-            });
+            }
             
             delete metabehavior;
             
