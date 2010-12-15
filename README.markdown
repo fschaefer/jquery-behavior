@@ -1,5 +1,5 @@
 # jQuery Behavior Plugin:
-Define rich behaviors that include both event handlers, helpers and (un)transformations on DOM elements.
+Define rich behaviors that include both event handlers and (un)transformations on DOM elements.
 
 ## Why Behaviors:
 While CSS stylesheets let us apply styles to our HTML pages without worrying about DOM load, traversal or changes over the lifetime of a page, we have to define the behaviors of the elements in a totally different way:
