@@ -7,7 +7,7 @@
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
  * Version: 0.9
- * Requires: jQuery 1.4.2+ and Live Query 1.1+ & Methods Plugin.
+ * Requires: jQuery 1.4.2+ and Live Query 1.1+.
  * 
  */
 
