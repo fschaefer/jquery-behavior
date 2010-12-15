@@ -53,7 +53,5 @@ The metabehavior object properties consists of jQuery CSS selectors and carry an
 jQuery 1.4.2+  
 Live Query 1.1+
 
-## Examples (old):
-Example #1: http://jsfiddle.net/FFNRS/
-
-Example #2: http://jsfiddle.net/BWQ6N/
+## Examples:
+Example #1: http://jsfiddle.net/apy83/
