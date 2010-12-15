@@ -1,6 +1,6 @@
 /*
  * jQuery Behavior Plugin: Define rich behaviors that include both event 
- * handlers, helpers and (un)transformations on DOM elements.
+ * handlers and (un)transformations on DOM elements.
  * 
  * Copyright (c) 2010 Florian Schäfer (florian.schaefer@gmail.com)
  * Dual licensed under the MIT (MIT_LICENSE.txt)
