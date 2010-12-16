@@ -94,7 +94,6 @@
                 switch (event) {
                     case 'transform':
                     case 'untransform':
-                    case 'methods':
                     case 'options':
                         // Don't handle these here.
                         continue;
