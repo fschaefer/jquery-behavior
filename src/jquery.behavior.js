@@ -64,7 +64,7 @@
         }
         
         // Handle $.behavior ([{ ... }, { ... }, ... ], [context]).
-        if (metabehaviors.constructor === Array) {
+        if ($.isArray (metabehaviors)) {
             return $.each (metabehaviors, function () {
                 $.behavior (this, context);
             });
@@ -83,7 +83,7 @@
             var $element = $(selector, context);
             
             // Transform DOM element.
-            if (typeof metabehavior['transform'] === 'function') {
+            if ($.isFunction (metabehavior['transform'])) {
                 $element.livequery (function () {
                     metabehavior['transform'].apply (this, arguments);
                 }, metabehavior['untransform']);
@@ -94,6 +94,7 @@
                 switch (event) {
                     case 'transform':
                     case 'untransform':
+                    case 'methods':
                     case 'options':
                         // Don't handle these here.
                         continue;
@@ -103,7 +104,7 @@
                             $element.expire (event);
                         }
                         
-                        if (typeof metabehavior[event] === 'function') {
+                        if ($.isFunction (metabehavior[event])) {
                             $element.livequery (event, metabehavior[event]);
                         }
                         break;
