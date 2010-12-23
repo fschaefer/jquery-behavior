@@ -73,14 +73,20 @@
         // Handle $.behavior ({ ... }, [context]).
         return $.each (metabehaviors, function (selector, metabehavior) {
             
-            metabehavior = $.extend ({
-                options: {},
+            metabehavior = $.extend (true, {
+                options: {
+                    expire: false
+                },
                 transform: undefined,
                 untransform: undefined
             }, metabehavior);
             
             // Cache element.
             var $element = $(selector, context);
+            
+            if (metabehavior.options['expire']) {
+                $element.expire ();
+            }
             
             // Transform DOM element.
             if ($.isFunction (metabehavior['transform'])) {
@@ -99,10 +105,6 @@
                         continue;
                     
                     default:
-                        if (metabehavior.options['expire']) {
-                            $element.expire (event);
-                        }
-                        
                         if ($.isFunction (metabehavior[event])) {
                             $element.livequery (event, metabehavior[event]);
                         }
