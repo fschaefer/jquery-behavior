@@ -34,7 +34,7 @@
                 to: value
             }, elem);
                     
-            retval = attr (elem, name, value); // call original.
+            retval = attr.apply (this, arguments); // call original.
             
             // value or type changed.
             if (current !== value) {
