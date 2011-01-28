@@ -2,11 +2,11 @@
  * jQuery Behavior Plugin: Define rich behaviors that include both event 
  * handlers and (un)transformations on DOM elements.
  * 
- * Copyright (c) 2010 Florian Schäfer (florian.schaefer@gmail.com)
+ * Copyright (c) 2010-2011 Florian Schäfer (florian.schaefer@gmail.com)
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
- * Version: 0.9
+ * Version: 1.0
  * Requires: jQuery 1.4.2+ and Live Query 1.1+.
  * 
  */
@@ -84,15 +84,15 @@
             // Cache element.
             var $element = $(selector, context);
             
-            if (metabehavior.options['expire']) {
+            if (metabehavior.options.expire) {
                 $element.expire ();
             }
             
             // Transform DOM element.
-            if ($.isFunction (metabehavior['transform'])) {
+            if ($.isFunction (metabehavior.transform)) {
                 $element.livequery (function () {
-                    metabehavior['transform'].apply (this, arguments);
-                }, metabehavior['untransform']);
+                    metabehavior.transform.apply (this, arguments);
+                }, metabehavior.untransform);
             }
             
             // Bind all events.
