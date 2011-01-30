@@ -10,7 +10,7 @@ While CSS stylesheets let us apply styles to our HTML pages without worrying abo
 
         /* the behavior */
         $('div.menu').do ().something ().with ().element ();
-        $('div.menu li > a').click (function (e) { ... }; });
+        $('div.menu li > a').click (function (e) { ... });
 
 
 The jQuery Behavior Plugin introduces a convention to define `` metabehaviors `` that mimic the unobtrusive way of CSS stylesheets.
@@ -22,10 +22,10 @@ The jQuery Behavior Plugin introduces a convention to define `` metabehaviors ``
         /* the behavior */
         $.behavior ({
             'div.menu li': {
-                'transform': function (e) { ... }; }
+                'transform': function (e) { ... }
             },
             'div.menu li > a': {
-                'click': function (e) { ... }; }
+                'click': function (e) { ... }
             }
         });
 
@@ -38,10 +38,10 @@ A metabehavior is the object describing the elements behaviors (before it is app
 
         var metabehavior = {
             'div.menu li': {
-                'transform': function (e) { ... }; }
+                'transform': function (e) { ... }
             },
             'div.menu li > a': {
-                'click': function (e) { ... }; }
+                'click': function (e) { ... }
             }
         };
 
