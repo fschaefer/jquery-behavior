@@ -117,4 +117,10 @@
         });
     };
     
+    $.fn.behavior = function (metabehaviors) {
+        return this.each (function () {
+            $.behavior (metabehaviors, this);
+        });
+    };
+        
 })(jQuery);
