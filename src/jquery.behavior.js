@@ -2,11 +2,11 @@
  * jQuery Behavior Plugin: Define rich behaviors that include both event 
  * handlers and (un)transformations on DOM elements.
  * 
- * Copyright (c) 2010-2011 Florian Schäfer (florian.schaefer@gmail.com)
+ * Copyright (c) 2011 Florian Schäfer (florian.schaefer@gmail.com)
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
- * Version: 1.0
+ * Version: 1.1
  * Requires: jQuery 1.4.2+ and Live Query 1.1+.
  * 
  */
@@ -33,7 +33,7 @@
                 from: current,
                 to: value
             }, elem);
-                    
+            
             retval = attr.apply (this, arguments); // call original.
             
             // value or type changed.
@@ -73,12 +73,12 @@
         // Handle $.behavior ({ ... }, [context]).
         return $.each (metabehaviors, function (selector, metabehavior) {
             
-            metabehavior = $.extend (true, {
+            metabehavior = $.extend ({
                 options: {
                     expire: false
                 },
-                transform: undefined,
-                untransform: undefined
+                transform: $.noop,
+                untransform: $.noop
             }, metabehavior);
             
             // Cache element.
@@ -89,11 +89,17 @@
             }
             
             // Transform DOM element.
-            if ($.isFunction (metabehavior.transform)) {
-                $element.livequery (function () {
-                    metabehavior.transform.apply (this, arguments);
-                }, metabehavior.untransform);
-            }
+            $element.livequery (function () {
+                var self = this;
+                setTimeout (function (){
+                    metabehavior.transform.apply (self, arguments);
+                }, 1);
+            }, function () {
+                var self = this;
+                setTimeout (function (){
+                    metabehavior.untransform.apply (self, arguments);
+                }, 1);
+            });
             
             // Bind all events.
             for (var event in metabehavior) {
@@ -105,9 +111,7 @@
                         continue;
                     
                     default:
-                        if ($.isFunction (metabehavior[event])) {
-                            $element.livequery (event, metabehavior[event]);
-                        }
+                        $element.livequery (event, metabehavior[event]);
                         break;
                 }
             }
@@ -122,5 +126,5 @@
             $.behavior (metabehaviors, this);
         });
     };
-        
+    
 })(jQuery);
