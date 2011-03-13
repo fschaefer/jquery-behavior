@@ -11,7 +11,7 @@
  * 
  */
 
-;(function($, attr) {
+(function($, attr) {
     
     // jQuery supports getData, setData and changeData,
     // support getAttr, setAttr, changeAttr too.
@@ -46,13 +46,15 @@
             }
         }
         return retval; // return original 
-    }
+    };
     
 })(jQuery, jQuery.attr);
 
-;(function($, undefined) {
+(function($, undefined) {
     
-    if (!$.fn.livequery) throw "jquery.behavior.js: jQuery Plugin: Live Query not loaded.";
+    if (!$.fn.livequery) {
+        throw "jquery.behavior.js: jQuery Plugin: Live Query not loaded.";
+    }
     
     $.behavior = function (metabehaviors, context) {
         
@@ -89,17 +91,7 @@
             }
             
             // Transform DOM element.
-            $element.livequery (function () {
-                var self = this;
-                setTimeout (function (){
-                    metabehavior.transform.apply (self, arguments);
-                }, 1);
-            }, function () {
-                var self = this;
-                setTimeout (function (){
-                    metabehavior.untransform.apply (self, arguments);
-                }, 1);
-            });
+            $element.livequery (metabehavior.transform, metabehavior.untransform);
             
             // Bind all events.
             for (var event in metabehavior) {
@@ -115,8 +107,6 @@
                         break;
                 }
             }
-            
-            delete metabehavior;
             
         });
     };
