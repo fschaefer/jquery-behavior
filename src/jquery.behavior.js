@@ -6,7 +6,7 @@
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
- * Version: 1.1
+ * Version: 1.2
  * Requires: jQuery 1.4.2+ and Live Query 1.1+.
  * 
  */
@@ -52,7 +52,7 @@
 
 (function($, undefined) {
     
-    if (!$.fn.livequery) {
+    if (!$.livequery) {
         throw "jquery.behavior.js: jQuery Plugin: Live Query not loaded.";
     }
     
@@ -84,28 +84,64 @@
             }, metabehavior);
             
             // Cache element.
-            var $element = $(selector, context);
-            
-            if (metabehavior.options.expire) {
-                $element.expire ();
-            }
+            var $elementInContext = $(selector, context),
+                $context = $(context);
             
             // Transform DOM element.
-            $element.livequery (metabehavior.transform, metabehavior.untransform);
+            $elementInContext.livequery (metabehavior.transform, metabehavior.untransform);
             
             // Bind all events.
             for (var event in metabehavior) {
-                switch (event) {
-                    case 'transform':
-                    case 'untransform':
-                    case 'options':
-                        // Don't handle these here.
-                        continue;
+                
+                if (metabehavior.hasOwnProperty(event)) {
                     
-                    default:
-                        $element.livequery (event, metabehavior[event]);
-                        break;
+                    switch (event) {
+                        case 'transform':
+                        case 'untransform':
+                        case 'options':
+                            // Don't handle these here.
+                            continue;
+                        
+                        case 'blur': 
+                        case 'focus': 
+                        case 'focusin': 
+                        case 'focusout': 
+                        case 'load': 
+                        case 'resize': 
+                        case 'scroll': 
+                        case 'unload': 
+                        case 'click': 
+                        case 'dblclick': 
+                        case 'mousedown': 
+                        case 'mouseup': 
+                        case 'mousemove': 
+                        case 'mouseover': 
+                        case 'mouseout': 
+                        case 'mouseenter': 
+                        case 'mouseleave': 
+                        case 'change': 
+                        case 'select': 
+                        case 'submit': 
+                        case 'keydown': 
+                        case 'keypress': 
+                        case 'keyup': 
+                        case 'error':
+                            if (metabehavior.options.expire) {
+                                $context.undelegate (selector, event);
+                            }
+                            $context.delegate (selector, event, metabehavior[event]);
+                            break;
+                        
+                        default:
+                            if (metabehavior.options.expire) {
+                                $elementInContext.expire (event);
+                            }
+                            $elementInContext.livequery (event, metabehavior[event]);
+                            break;
+                    }
+                    
                 }
+                
             }
             
         });
