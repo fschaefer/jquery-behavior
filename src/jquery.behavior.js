@@ -6,7 +6,7 @@
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
- * Version: 1.2
+ * Version: 1.3
  * Requires: jQuery 1.4.2+ and Live Query 1.1+.
  * 
  */
@@ -126,9 +126,19 @@
                     case 'keyup':
                     case 'error':
                         if (metabehavior.options.expire) {
-                            $context.undelegate(selector, event);
+                            if ($.fn.off) {
+                                $context.off(event, selector);
+                            } else {
+                                $context.undelegate(selector, event);
+                            }
                         }
-                        $context.delegate(selector, event, metabehavior[event]);
+
+                        if ($.fn.on) {
+                            $context.on(event, selector, metabehavior[event]);
+                        } else {
+                            $context.delegate(selector, event, metabehavior[event]);
+                        }
+
                         break;
 
                     default:
