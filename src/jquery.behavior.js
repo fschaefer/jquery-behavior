@@ -59,19 +59,24 @@
 
         context = context || window.document;
 
-        // Handle $.behavior (""), $.behavior (null), or $.behavior (undefined).
+        // Handle $.behavior(function () {}).
+        if ($.isFunction(metabehaviors)) {
+            metabehaviors = metabehaviors();
+        }
+
+        // Handle $.behavior(""), $.behavior(null), or $.behavior(undefined).
         if (!metabehaviors) {
             return this;
         }
 
-        // Handle $.behavior ([{ ... }, { ... }, ... ], [context]).
+        // Handle $.behavior([{ ... }, { ... }, ... ], [context]).
         if ($.isArray(metabehaviors)) {
             return $.each(metabehaviors, function () {
                 $.behavior(this, context);
             });
         }
 
-        // Handle $.behavior ({ ... }, [context]).
+        // Handle $.behavior({ ... }, [context]).
         return $.each(metabehaviors, function (selector, metabehavior) {
 
             metabehavior = $.extend({
