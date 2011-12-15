@@ -80,9 +80,6 @@
         return $.each(metabehaviors, function (selector, metabehavior) {
 
             metabehavior = $.extend({
-                options: {
-                    expire: false
-                },
                 transform: $.noop,
                 untransform: $.noop
             }, metabehavior);
@@ -130,26 +127,14 @@
                     case 'keypress':
                     case 'keyup':
                     case 'error':
-                        if (metabehavior.options.expire) {
-                            if ($.fn.off) {
-                                $context.off(event, selector);
-                            } else {
-                                $context.undelegate(selector, event);
-                            }
-                        }
-
                         if ($.fn.on) {
                             $context.on(event, selector, metabehavior[event]);
                         } else {
                             $context.delegate(selector, event, metabehavior[event]);
                         }
-
                         break;
 
                     default:
-                        if (metabehavior.options.expire) {
-                            $elementInContext.expire(event);
-                        }
                         $elementInContext.livequery(event, metabehavior[event]);
                         break;
                     }
