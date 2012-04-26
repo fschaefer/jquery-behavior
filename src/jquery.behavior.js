@@ -79,6 +79,11 @@
         // Handle $.behavior({ ... }, [context]).
         return $.each(metabehaviors, function (selector, metabehavior) {
 
+            // Evaluate metabehavior if it's a function.
+            if ($.isFunction(metabehavior)) {
+                metabehavior = metabehavior();
+            }
+
             metabehavior = $.extend({
                 transform: $.noop,
                 untransform: $.noop
