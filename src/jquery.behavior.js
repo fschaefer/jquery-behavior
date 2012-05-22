@@ -6,8 +6,8 @@
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
- * Version: 1.3
- * Requires: jQuery 1.4.2+ and Live Query 1.1+.
+ * Version: 1.4
+ * Requires: jQuery 1.7+ plus modified Live Query 1.1.1
  * 
  */
 (function ($, attr) {
@@ -104,40 +104,8 @@
                     switch (event) {
                     case 'transform':
                     case 'untransform':
-                    case 'options':
                         // Don't handle these here.
                         continue;
-
-                    case 'blur':
-                    case 'focus':
-                    case 'focusin':
-                    case 'focusout':
-                    case 'load':
-                    case 'resize':
-                    case 'scroll':
-                    case 'unload':
-                    case 'click':
-                    case 'dblclick':
-                    case 'mousedown':
-                    case 'mouseup':
-                    case 'mousemove':
-                    case 'mouseover':
-                    case 'mouseout':
-                    case 'mouseenter':
-                    case 'mouseleave':
-                    case 'change':
-                    case 'select':
-                    case 'submit':
-                    case 'keydown':
-                    case 'keypress':
-                    case 'keyup':
-                    case 'error':
-                        if ($.fn.on) {
-                            $context.on(event, selector, metabehavior[event]);
-                        } else {
-                            $context.delegate(selector, event, metabehavior[event]);
-                        }
-                        break;
 
                     default:
                         $elementInContext.livequery(event, metabehavior[event]);

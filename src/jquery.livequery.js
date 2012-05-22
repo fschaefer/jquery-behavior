@@ -83,7 +83,7 @@ $.livequery.prototype = {
 
 		if ( this.type )
 			// Unbind all bound events
-			this.elements.unbind(this.type, this.fn);
+			this.elements.off(this.type, this.fn);
 		else if (this.fn2)
 			// Call the second function for all matched elements
 			this.elements.each(function(i, el) {
@@ -111,7 +111,7 @@ $.livequery.prototype = {
 
 		if (this.type) {
 			// Bind events to newly matched elements
-			nEls.bind(this.type, this.fn);
+			nEls.on(this.type, this.fn);
 
 			// Unbind events to elements no longer matched
 			if (oEls.length > 0)
