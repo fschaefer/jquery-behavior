@@ -50,7 +50,8 @@ A metabehavior is the object describing the elements behaviors (before it is app
 The metabehavior object properties consists of jQuery CSS selectors and carry an object with jQuery events names and attached actions. All jQuery events are supported, even 'ajaxStart' and such. In addition to the jQuery events, two special events are defined: `` 'transform' `` (a action that is applied if an element appears in DOM) and `` 'untransform' `` (a action that is triggered when an element is removed from DOM).
 
 ## Requirements:
-jQuery 1.4.2+  
+jQuery 1.7+
+
 Live Query 1.1+
 
 ## Examples:
