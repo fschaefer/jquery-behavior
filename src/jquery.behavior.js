@@ -80,8 +80,7 @@
         return $.each(metabehaviors, function (selector, metabehavior) {
 
             // Cache element.
-            var $elementInContext = $(selector, context),
-                $context = $(context);
+            var $elementInContext = $(selector, context);
 
             // Evaluate metabehavior if it's a function.
             if ($.isFunction(metabehavior)) {
