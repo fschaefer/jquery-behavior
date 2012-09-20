@@ -79,19 +79,20 @@
         // Handle $.behavior({ ... }, [context]).
         return $.each(metabehaviors, function (selector, metabehavior) {
 
+            // Cache element.
+            var $elementInContext = $(selector, context),
+                $context = $(context);
+
             // Evaluate metabehavior if it's a function.
             if ($.isFunction(metabehavior)) {
-                metabehavior = metabehavior();
+                metabehavior = metabehavior.call($elementInContext);
             }
 
+            // Provide at least noop functions for transform and untransform.
             metabehavior = $.extend({
                 transform: $.noop,
                 untransform: $.noop
             }, metabehavior);
-
-            // Cache element.
-            var $elementInContext = $(selector, context),
-                $context = $(context);
 
             // Transform DOM element.
             $elementInContext.livequery(metabehavior.transform, metabehavior.untransform);
