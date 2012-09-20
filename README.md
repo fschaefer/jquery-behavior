@@ -54,4 +54,4 @@ jQuery 1.4.2+
 Live Query 1.1+
 
 ## Examples:
-Example #1: http://jsfiddle.net/apy83/
+Example #1: http://jsfiddle.net/apy83/56/
