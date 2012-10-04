@@ -125,4 +125,10 @@
         });
     };
 
+    $(function () {
+        $('script[type="text/behavior"]').livequery(function () {
+            $.behavior(eval('({' + $(this).text() + '})'));
+        });
+    });
+
 })(jQuery);
