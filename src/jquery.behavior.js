@@ -93,9 +93,6 @@
                 untransform: $.noop
             }, metabehavior);
 
-            // Transform DOM element.
-            $elementInContext.livequery(metabehavior.transform, metabehavior.untransform);
-
             // Bind all events.
             for (var event in metabehavior) {
 
@@ -115,6 +112,9 @@
                 }
 
             }
+
+            // Transform DOM element.
+            $elementInContext.livequery(metabehavior.transform, metabehavior.untransform);
 
         });
     };
