@@ -1,14 +1,14 @@
 /*
- * jQuery Behavior Plugin: Define rich behaviors that include both event 
+ * jQuery Behavior Plugin: Define rich behaviors that include both event
  * handlers and (un)transformations on DOM elements.
- * 
+ *
  * Copyright (c) 2011 Florian Schäfer (florian.schaefer@gmail.com)
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
  * Version: 1.4
  * Requires: jQuery 1.7+ plus modified Live Query 1.1.1
- * 
+ *
  */
 (function ($, attr) {
 
@@ -44,7 +44,7 @@
                 }, elem);
             }
         }
-        return retval; // return original 
+        return retval; // return original
     };
 
 })(jQuery, jQuery.attr);
