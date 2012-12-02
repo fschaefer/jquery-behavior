@@ -98,15 +98,8 @@
 
                 if (metabehavior.hasOwnProperty(event)) {
 
-                    switch (event) {
-                    case 'transform':
-                    case 'untransform':
-                        // Don't handle these here.
-                        continue;
-
-                    default:
+                    if (event !== 'transform' && event !== 'untransform') {
                         $elementInContext.livequery(event, metabehavior[event]);
-                        break;
                     }
 
                 }
