@@ -98,9 +98,7 @@
 
                 if (metabehavior.hasOwnProperty(event)) {
 
-                    if (event !== 'transform' && event !== 'untransform') {
-                        $elementInContext.livequery(event, metabehavior[event]);
-                    }
+                    $elementInContext.livequery(event, metabehavior[event]);
 
                 }
 
