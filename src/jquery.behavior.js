@@ -55,9 +55,7 @@
         throw "jquery.behavior.js: jQuery Plugin: Live Query not loaded.";
     }
 
-    $.behavior = function (metabehaviors, context) {
-
-        context = context || window.document;
+    $.behavior = function (metabehaviors) {
 
         // Handle $.behavior(function () {}).
         if ($.isFunction(metabehaviors)) {
@@ -69,22 +67,22 @@
             return this;
         }
 
-        // Handle $.behavior([{ ... }, { ... }, ... ], [context]).
+        // Handle $.behavior([{ ... }, { ... }, ... ]).
         if ($.isArray(metabehaviors)) {
             return $.each(metabehaviors, function () {
-                $.behavior(this, context);
+                $.behavior(this);
             });
         }
 
-        // Handle $.behavior({ ... }, [context]).
+        // Handle $.behavior({ ... }).
         return $.each(metabehaviors, function (selector, metabehavior) {
 
             // Cache element.
-            var $elementInContext = $(selector, context);
+            var $element = $(selector);
 
             // Evaluate metabehavior if it's a function.
             if ($.isFunction(metabehavior)) {
-                metabehavior = metabehavior.call($elementInContext);
+                metabehavior = metabehavior.call($element);
             }
 
             // Provide at least noop functions for transform and untransform.
@@ -98,14 +96,14 @@
 
                 if (metabehavior.hasOwnProperty(event)) {
 
-                    $elementInContext.livequery(event, metabehavior[event]);
+                    $(document).on(event, $element.selector, metabehavior[event]);
 
                 }
 
             }
 
             // Transform DOM element.
-            $elementInContext.livequery(metabehavior.transform, metabehavior.untransform);
+            $element.livequery(metabehavior.transform, metabehavior.untransform);
 
         });
     };
@@ -118,7 +116,9 @@
 
     $(function () {
         $('script[type="text/behavior"]').livequery(function () {
-            $.behavior(eval('({' + $(this).text() + '})'));
+            var src = $(this).attr('src'),
+                text = $(this).text();
+            $.behavior(eval('({' + (src ? $.ajax({ url: src, async: false }).responseText : text) + '})'));
         });
     });
 

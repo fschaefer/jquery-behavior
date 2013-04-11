@@ -60,7 +60,7 @@ The jQuery Behavior Plugin tries to evaluate `<script>` tags with `type="text/be
         }
     </script>
 
-This is experimental and only works with inline scripts. `<script>` tags with `src` attribute won't work!
+This is experimental!
 
 ## Requirements:
 jQuery 1.7+
