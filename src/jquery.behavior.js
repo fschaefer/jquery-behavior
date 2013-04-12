@@ -108,10 +108,11 @@
         });
     };
 
-    $.fn.behavior = function (metabehaviors) {
-        return this.each(function () {
-            $.behavior(metabehaviors, this);
-        });
+    $.fn.behavior = function (behaviors) {
+        var metabehavior = {};
+        metabehavior[this.selector] = behaviors;
+        $.behavior(metabehavior);
+        return this;
     };
 
     $(function () {
