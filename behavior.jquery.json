@@ -1,0 +1,35 @@
+{
+    "name": "behavior",
+    "title": "jQuery Behavior Plugin",
+    "description": "Unobstrusive scripting simply and easily. Declarative events with Metabehaviors based on Live Query.",
+    "keywords": [
+        "live",
+        "behavior",
+        "dom",
+        "events"
+    ],
+    "version": "1.4",
+    "author": {
+        "name": "Florian Schäfer",
+        "email": "florian.schaefer@gmail.com",
+        "url": "https://github.com/fschaefer"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://raw.github.com/fschaefer/jquery-behavior/master/MIT-LICENSE.txt"
+        },
+        {
+            "type": "GPL",
+            "url": "https://raw.github.com/fschaefer/jquery-behavior/master/GPL-LICENSE.txt"
+        }
+    ],
+    "bugs": "https://github.com/fschaefer/jquery-behavior/issues",
+    "homepage": "https://github.com/fschaefer/jquery-behavior",
+    "docs": "https://github.com/fschaefer/jquery-behavior",
+    "download": "https://github.com/fschaefer/jquery-behavior/archive/master.zip",
+    "dependencies": {
+        "jquery": ">=1.7",
+        "livequery": "=1.1.1"
+    }
+}
