@@ -6,7 +6,7 @@
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
- * Version: 1.4
+ * Version: 1.4.0
  * Requires: jQuery 1.7+ plus modified Live Query 1.1.1
  *
  */
