@@ -6,7 +6,7 @@
  * Dual licensed under the MIT (MIT_LICENSE.txt)
  * and GPL Version 2 (GPL_LICENSE.txt) licenses.
  *
- * Version: 1.4.0
+ * Version: 1.4.1
  * Requires: jQuery 1.7+ plus modified Live Query 1.1.1
  *
  */
@@ -55,7 +55,7 @@
         throw "jquery.behavior.js: jQuery Plugin: Live Query not loaded.";
     }
 
-    $.behavior = function (metabehaviors) {
+    $.behavior = function (metabehaviors, unbind) {
 
         // Handle $.behavior(function () {}).
         if ($.isFunction(metabehaviors)) {
@@ -96,22 +96,28 @@
 
                 if (metabehavior.hasOwnProperty(event)) {
 
-                    $(document).on(event, $element.selector, metabehavior[event]);
+                    unbind
+                        ? $(document).off(event, $element.selector, metabehavior[event])
+                        : $(document).on(event, $element.selector, metabehavior[event])
+                        ;
 
                 }
 
             }
 
             // Transform DOM element.
-            $element.livequery(metabehavior.transform, metabehavior.untransform);
+            unbind
+                ? $element.expire(metabehavior.transform, metabehavior.untransform)
+                : $element.livequery(metabehavior.transform, metabehavior.untransform)
+                ;
 
         });
     };
 
-    $.fn.behavior = function (behaviors) {
+    $.fn.behavior = function (behaviors, unbind) {
         var metabehavior = {};
         metabehavior[this.selector] = behaviors;
-        $.behavior(metabehavior);
+        $.behavior(metabehavior, unbind);
         return this;
     };
 
