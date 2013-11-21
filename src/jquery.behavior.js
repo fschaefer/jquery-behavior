@@ -100,8 +100,8 @@
                 if (metabehavior.hasOwnProperty(event)) {
 
                     unbind
-                        ? $($context[0]).off(event, $element.selector, metabehavior[event])
-                        : $($context[0]).on(event, $element.selector, metabehavior[event])
+                        ? $context.off(event, $element.selector, metabehavior[event])
+                        : $context.on(event, $element.selector, metabehavior[event])
                         ;
 
                 }
