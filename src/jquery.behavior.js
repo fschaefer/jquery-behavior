@@ -81,13 +81,13 @@
         }
 
         // Promise a context
-        context = context || document;
+        var $context = $(context || document);
 
         // Handle $.behavior({ ... }).
         return $.each(metabehaviors, function (selector, metabehavior) {
 
             // Cache element.
-            var $element = $(selector, context);
+            var $element = $(selector, $context[0]);
 
             // Evaluate metabehavior if it's a function.
             if ($.isFunction(metabehavior)) {
@@ -100,8 +100,8 @@
                 if (metabehavior.hasOwnProperty(event)) {
 
                     unbind
-                        ? $($element.context).off(event, $element.selector, metabehavior[event])
-                        : $($element.context).on(event, $element.selector, metabehavior[event])
+                        ? $($context[0]).off(event, $element.selector, metabehavior[event])
+                        : $($context[0]).on(event, $element.selector, metabehavior[event])
                         ;
 
                 }
