@@ -110,8 +110,8 @@
 
             // Transform DOM element.
             unbind
-                ? metabehavior.transform && $element.expire(metabehavior.transform, metabehavior.untransform)
-                : metabehavior.transform && $element.livequery(metabehavior.transform, metabehavior.untransform)
+                ? metabehavior.transform && $element.expire(null, metabehavior.transform, metabehavior.untransform)
+                : metabehavior.transform && $element.livequery(null, metabehavior.transform, metabehavior.untransform)
                 ;
 
         });
@@ -131,5 +131,13 @@
             $.behavior(eval('({' + (src ? $.ajax({ url: src, async: false }).responseText : text) + '})'));
         });
     });
+
+    $.fn.transform = function (fn, fn2) {
+        return $(this).livequery(null, fn, fn2);
+    };
+
+    $.fn.untransform = function (fn2) {
+        return $(this).livequery(null, null, fn2);
+    };
 
 })(jQuery);
