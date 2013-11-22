@@ -76,7 +76,7 @@
         this.id = $.livequery.queries.push(this) - 1;
 
         // Mark the functions for matching later on
-        fn.$lqguid = fn.$lqguid || $.livequery.guid++;
+        if (fn) fn.$lqguid = fn.$lqguid || $.livequery.guid++;
         if (fn2) fn2.$lqguid = fn2.$lqguid || $.livequery.guid++;
 
         // Return the Live Query
@@ -131,9 +131,11 @@
                 }
             } else {
                 // Call the first function for newly matched elements
-                for (var i = 0, l = nEls.length; i < l; i++) {
-                    var el = nEls[i];
-                    query.fn.apply(el);
+                if (this.fn && nEls.length > 0) {
+                    for (var i = 0, l = nEls.length; i < l; i++) {
+                        var el = nEls[i];
+                        query.fn.apply(el);
+                    }
                 }
 
                 // Call the second function for elements no longer matched
