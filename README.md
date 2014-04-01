@@ -68,6 +68,6 @@ jQuery 1.7+
 Live Query 1.1+
 
 ## Examples:
-Example #1: http://jsfiddle.net/apy83/56/
+Example #1: http://jsfiddle.net/apy83/58/
 
-Example #2: http://jsfiddle.net/ZUBVf/
+Example #2: http://jsfiddle.net/ZUBVf/3/
