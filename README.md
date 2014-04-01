@@ -70,4 +70,4 @@ Live Query 1.1+
 ## Examples:
 Example #1: http://jsfiddle.net/apy83/58/
 
-Example #2: http://jsfiddle.net/ZUBVf/3/
+Example #2: http://jsfiddle.net/ZUBVf/4/
