@@ -60,7 +60,7 @@ The jQuery Behavior Plugin tries to evaluate `<script>` tags with `type="text/be
         }
     </script>
 
-This is experimental!
+This is experimental and disabled by default, to enable it use `$.behavior.scriptTag = true`.
 
 ## Requirements:
 jQuery 1.7+

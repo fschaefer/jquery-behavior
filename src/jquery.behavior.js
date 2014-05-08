@@ -125,11 +125,13 @@
     };
 
     $(function () {
-        $('script[type="text/behavior"]').livequery(function () {
-            var src = $(this).attr('src'),
-                text = $(this).text();
-            $.behavior(eval('({' + (src ? $.ajax({ url: src, async: false }).responseText : text) + '})'));
-        });
+        if ($.behavior && $.behavior.scriptTag) {
+            $('script[type="text/behavior"]').livequery(function () {
+                var src = $(this).attr('src'),
+                    text = $(this).text();
+                $.behavior(eval('({' + (src ? $.ajax({ url: src, async: false }).responseText : text) + '})'));
+            });
+        }
     });
 
     $.fn.transform = function (fn, fn2) {
