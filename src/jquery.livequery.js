@@ -91,7 +91,7 @@
                 // Unbind all bound events
                 this.elements.off(this.type, this.fn);
             } else if (this.fn2) {
-            // Call the second function for all matched elements
+                // Call the second function for all matched elements
                 for (var i = 0, l = this.elements.length; i < l; i++) {
                     var el = this.elements[i];
                     query.fn2.apply(el);
