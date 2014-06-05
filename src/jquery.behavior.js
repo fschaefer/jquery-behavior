@@ -55,6 +55,9 @@
         throw "jquery.behavior.js: jQuery Plugin: Live Query not loaded.";
     }
 
+    var transform = /\btransform\b/;
+    var untransform = /\buntransform\b/;
+
     $.behavior = function (metabehaviors, context, unbind) {
 
         // Handle $.behavior(function () {}, [context]).
@@ -99,20 +102,19 @@
 
                 if (metabehavior.hasOwnProperty(event)) {
 
-                    unbind
-                        ? $context.off(event, $element.selector, metabehavior[event])
-                        : $context.on(event, $element.selector, metabehavior[event])
-                        ;
+                    $context[unbind ? 'off' : 'on'](event, $element.selector, metabehavior[event])
+
+                    if (transform.test(event) && untransform.test(event)) {
+                        $element[unbind ? 'expire' : 'livequery'](null, metabehavior[event], metabehavior[event])
+                    } else if (transform.test(event)) {
+                        $element[unbind ? 'expire' : 'livequery'](null, metabehavior[event], $.noop)
+                    } else if (untransform.test(event)) {
+                        $element[unbind ? 'expire' : 'livequery'](null, $.noop, metabehavior[event])
+                    }
 
                 }
 
             }
-
-            // Transform DOM element.
-            unbind
-                ? metabehavior.transform && $element.expire(null, metabehavior.transform, metabehavior.untransform)
-                : metabehavior.transform && $element.livequery(null, metabehavior.transform, metabehavior.untransform)
-                ;
 
         });
     };
